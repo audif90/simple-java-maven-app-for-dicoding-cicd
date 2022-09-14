@@ -1,10 +1,10 @@
 node {
     docker.image('maven:3-alpine').inside('-v /root/.m2:/root/.m2') {
         stage('build'){
-                withMaven(){
-                sh 'mvn -B -DskipTests clean package'   
-                }
+            withMaven(){
+            sh 'mvn -B -DskipTests clean package'   
             }
+        }
 
         stage('test'){
             withMaven(){
