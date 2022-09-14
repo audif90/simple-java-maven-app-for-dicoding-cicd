@@ -1,7 +1,8 @@
 node {
     stage('build'){
-        withDockerContainer(args: '-v /root/.m2:/root/.m2', image:'maven:3-alpine'){
-            sh 'mvn -B -DskipTests clean package'
+        docker.image('maven:3-alpine').withRun('-v /root/.m2:/root/.m2') {
+            c -> 
+                sh 'mvn -B -DskipTests clean package'
         }
     }
 
