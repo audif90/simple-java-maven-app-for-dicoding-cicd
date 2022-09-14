@@ -1,19 +1,19 @@
 node {
-    stage('build'){
-        docker.image('maven:3-alpine').inside('-v /root/.m2:/root/.m2') {
+    docker.image('maven:3-alpine').inside('-v /root/.m2:/root/.m2') {
+        stage('build'){
+                withMaven(){
+                sh 'mvn -B -DskipTests clean package'   
+                }
+            }
+
+        stage('test'){
             withMaven(){
-            sh 'mvn -B -DskipTests clean package'   
+            sh 'mvn test'
             }
         }
-    }
 
-    stage('test'){
-        withMaven(){
-        sh 'mvn test'
+        stage('deploy'){
+            sh './jenkins/scripts/deliver.sh'
         }
-    }
-
-    stage('deploy'){
-        sh './jenkins/scripts/deliver.sh'
     }
 }
