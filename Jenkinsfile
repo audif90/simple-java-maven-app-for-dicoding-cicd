@@ -8,9 +8,12 @@ node {
 
         stage('test'){
             sh 'ls -alh'
-            withMaven(){
-            sh 'mvn test'
-            }
+            sh 'echo test'
+            sh 'pwd'
+            sh 'ls -alh'
+            // withMaven(){
+            // sh 'mvn test'
+            // }
         }
 
         stage('deploy'){
