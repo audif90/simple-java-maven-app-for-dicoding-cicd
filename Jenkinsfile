@@ -7,6 +7,7 @@ node {
         }
 
         stage('test'){
+            sh 'ls -alh'
             withMaven(){
             sh 'mvn test'
             }
