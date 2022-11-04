@@ -1,6 +1,7 @@
 node {
     docker.image('maven:3-alpine').inside('-v /root/.m2:/root/.m2') {
         stage('build'){
+            sh 'git pull'
             sh 'ls -all && pwd'
             withMaven(){
             sh 'mvn -B -DskipTests clean package'   
