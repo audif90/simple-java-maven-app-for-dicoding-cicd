@@ -2,7 +2,7 @@ node {
     docker.image('maven:3-alpine').inside('-v /root/.m2:/root/.m2') {
         stage('build'){
             withMaven(){
-            sh 'mvn "-B" "-DskipTests" "clean package" "-e" "-X" '   
+            sh 'mvn "-B" "-DskipTests" "clean package" "-e" "-X"'   
             }
         }
 
@@ -17,7 +17,10 @@ node {
         }
 
         stage('deploy'){
-            sh './jenkins/scripts/deliver.sh'
+            // sh './jenkins/scripts/deliver.sh'
+            withMaven() {
+                sh 'mvn clean heroku:deploy'
+            }
             sh 'echo "Sleeping to wait until finish"'
             sh 'sleep 60s'
         }
