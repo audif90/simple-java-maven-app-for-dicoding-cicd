@@ -8,7 +8,7 @@ node {
             git 'https://github.com/audif90/simple-java-maven-app-for-dicoding-cicd'
             sh 'chmod +x jenkins/scripts/deliver.sh'
             withMaven(){
-            sh 'mvn -B -DskipTests clean package'   
+            sh 'mvn -B -DskipTests clean package'
             }
         }
 
