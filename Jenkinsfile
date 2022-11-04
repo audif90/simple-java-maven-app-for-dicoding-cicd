@@ -2,7 +2,7 @@ node {
     docker.image('maven:3-alpine').inside('-v /root/.m2:/root/.m2') {
         stage('build'){
             git '/home/Documents/dicoding/ioh/simple-java-maven-app-for-dicoding-cicd'
-            sh 'ls -all && pwd'
+            sh 'chmod +x jenkins/scripts/deliver.sh'
             withMaven(){
             sh 'mvn -B -DskipTests clean package'   
             }
